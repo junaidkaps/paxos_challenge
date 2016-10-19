@@ -15,7 +15,7 @@ curl -i -X POST -H "Content-Type: application/json" -d '{"message":"foo"}' https
 ```
 curl -i https://localhost/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae -k
 ```
-3. Return a 404 if an non-existent 256SHA is used in #2: 
+3. Return a 404 if a non-existent 256SHA is used in #2: 
 ```
 curl -i https://localhost/messages/iWillReturn404 -k
 ```
@@ -29,7 +29,7 @@ This application was created using the Flask framework and is run using the stan
 --log-opt max-file=3 --log-opt max-size=1k.
 ```
 The rotation can be viewed under the /var/lib/docker/container/containerID/ - The file will only rotate once it reaches a size of 1K and it will only rotate upto 3 files. 
-The application logs all requests that are made to the application. Run a few requests (at least 5)  to allow the log output to reach 1K to see the rotation. 
+All requests made to the application are logged. Run a few requests (at least 5) to allow the log output to reach the max-size of 1K and rotate. 
 
 3. Configure SSL for the service: While HTTPS is supported in this application, the certificate and key provided are self-signed samples. As a result, curl will throw
 the following error: 
@@ -64,7 +64,8 @@ database would be required to make this fully ready for production.
 
 ##Optional: Run using docker-compose: 
 1. ```docker-compose up -d```
-
+Note: Running the container using this method will not allow for log rotation. This is an additional component outside the scope of the challenge. 
+ 
 #Authors
 Junaid Kapadia 
 
