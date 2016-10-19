@@ -14,9 +14,12 @@ Note: While HTTPS is supported in this application the certificate and key provi
 the following error: curl: (60) SSL certificate problem: self signed certificate. In order to avoid this when using self-signed certificates please use the -k 
 option as noted in the commands below to avoid SSL verification. 
 
-1. /POST a message to the application and obtain 256SHA: curl -i -X POST -H "Content-Type: application/json" -d '{"message":"foo"}' https://localhost/messages -k 
-2. /GET the original message (foo or whatever was specified in #1) using the 256SHA: curl  -i https://localhost/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae -k
-3. Return a 404 if an non-existent SHA is used in #2: curl -i https://localhost/messages/iWillReturn404 -k
+1. /POST a message to the application and obtain 256SHA: 
+```curl -i -X POST -H "Content-Type: application/json" -d '{"message":"foo"}' https://localhost/messages -k```
+2. /GET the original message (foo or whatever was specified in #1) using the 256SHA: 
+```curl  -i https://localhost/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae -k```
+3. Return a 404 if an non-existent SHA is used in #2: 
+```curl -i https://localhost/messages/iWillReturn404 -k```
 
 This application was created using the Flask framework and is run using the stand-alone Tornado WSGI container. 
 
