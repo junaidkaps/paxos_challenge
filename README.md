@@ -29,7 +29,7 @@ This application was created using the Flask framework and is run using the stan
 --log-opt max-file=3 --log-opt max-size=1k.
 ```
 The rotation can be viewed under the /var/lib/docker/container/containerID/ - The file will only rotate once it reaches a size of 1K and it will only rotate upto 3 files. 
-The application logs all requests that are made to the application. Run a few requests to allow the log output to reach 1K to see the rotation. 
+The application logs all requests that are made to the application. Run a few requests (at least 5)  to allow the log output to reach 1K to see the rotation. 
 
 3. Configure SSL for the service: While HTTPS is supported in this application, the certificate and key provided are self-signed samples. As a result, curl will throw
 the following error: 
