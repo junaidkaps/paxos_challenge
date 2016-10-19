@@ -2,18 +2,18 @@
 This repository is a submission for the Paxos Code Challenge. Instructions and answers to the code challenge questions can be found below. 
 
 ##Pull image from Dockerhub and Run:
-1. docker pull junaidkaps/paxoschallenge
-2. docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k junaidkaps/paxos_challenge
+1. ```docker pull junaidkaps/paxoschallenge```
+2. ```docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k junaidkaps/paxos_challenge```
 
-## Available Application Commands & Overview: 
+## Available Application Commands: 
  
 1. /POST a message to the application and obtain 256SHA: 
 ```
 curl -i -X POST -H "Content-Type: application/json" -d '{"message":"foo"}' https://localhost/messages -k
 ```
-2. /GET the original message (foo or whatever was specified in #1) using the 256SHA: 
+2. /GET the original message (string specified in #1) using the 256SHA: 
 ```
-curl  -i https://localhost/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae -k
+curl -i https://localhost/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae -k
 ```
 3. Return a 404 if an non-existent SHA is used in #2: 
 ```
@@ -22,19 +22,25 @@ curl -i https://localhost/messages/iWillReturn404 -k
 
 This application was created using the Flask framework and is run using the stand-alone Tornado WSGI container. 
 
-##Notes: 
-1. The service should be restarted if it crashes -> This was acheived using docker's ```--restart=always``` flag as indicated in the command above. 
-2. Capture the logs and have them rotate -> The docker container logs were captured in json format and rotated using the following constraints: 
+##Notes on Application Requirements: 
+1. The service should be restarted if it crashes: This was acheived using docker's ```--restart=always``` flag as indicated in the command above. 
+2. Capture the logs and have them rotate: The docker container logs were captured in json format and rotated using the following constraints: 
 ```
 --log-opt max-file=2 --log-opt max-size=1k.
 ```
 The rotation can be viewed under the /var/lib/docker/containerID/ - The file will only rotate once it reaches a size of 1K. 
 
-3. Configure SSL for the service: While HTTPS is supported in this application, the certificate and key provided is a sample and is self-signed. As a result, curl will throw
-the following error: curl: (60) SSL certificate problem: self signed certificate. In order to avoid this when using self-signed certificates please use the -k option as noted in the commands above to avoid SSL certificate verification. 
+3. Configure SSL for the service: While HTTPS is supported in this application, the certificate and key provided are self-signed samples. As a result, curl will throw
+the following error: 
+```
+curl: (60) SSL certificate problem: self signed certificate
+``` 
+In order to avoid this error disable certificate validation by using the -k option as noted in the commands above. 
 
 References: 
-Hashlib: http://pythoncentral.io/hashing-strings-with-python/
+1. Python Flask Documentation 
+2. Python Tornado Documentation 
+3. Hashlib
 
 ##Code Challenge Question: 
 Include at least a few sentences to answer the following question: How would your
