@@ -28,13 +28,10 @@ This application was created using the Flask framework and is run using the stan
 ```
 --log-opt max-file=2 --log-opt max-size=1k.
 ```
-The rotation can be viewed under the /var/lib/docker/<containerID>/ - The file will only rotate once it reaches a size of 1K. 
+The rotation can be viewed under the /var/lib/docker/containerID/ - The file will only rotate once it reaches a size of 1K. 
 
-3. Configure SSL for the service -> Configured. Please use -k option to avoid self-signed errors. 
-
-Note: While HTTPS is supported in this application the certificate and key provided as a sample is self-signed. As a result, curl will throw
-the following error: curl: (60) SSL certificate problem: self signed certificate. In order to avoid this when using self-signed certificates please use the -k
-option as noted in the commands below to avoid SSL verification.
+3. Configure SSL for the service: While HTTPS is supported in this application, the certificate and key provided is a sample and is self-signed. As a result, curl will throw
+the following error: curl: (60) SSL certificate problem: self signed certificate. In order to avoid this when using self-signed certificates please use the -k option as noted in the commands above to avoid SSL certificate verification. 
 
 References: 
 Hashlib: http://pythoncentral.io/hashing-strings-with-python/
@@ -52,11 +49,11 @@ other factors will affect the scalability of the application. This includes and 
 there are many things that can be done including but not limited to fronting several identical application servers with a load balancer or segregating requests across different servers. Finally, the current implementation stores data in memory. An actual noSQL or SQL database would be required to make this fully ready for production. 
 ```
 ## Optional: To build the application locally and run: 
-1. docker build -t <imageName> 
-2. docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k <imageName>
+1. ```docker build -t <imageName>```
+2. ```docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k <imageName>```
 
 ##Optional: Run using docker-compose: 
-1. docker-compose up -d 
+1. ```docker-compose up -d```
 
 #Authors
 Junaid Kapadia 
