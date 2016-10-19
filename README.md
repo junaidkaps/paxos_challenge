@@ -2,8 +2,8 @@
 This repository is a submission for the Paxos Code Challenge. Instructions and answers to the code challenge questions can be found below. 
 
 ##Pull image from Dockerhub and Run:
-1. ```docker pull junaidkaps/paxos_challenge```
-2. ```docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k junaidkaps/paxos_challenge```
+1. ```docker pull junaidkaps/paxos_challenge:latest```
+2. ```docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k junaidkaps/paxos_challenge:latest```
 
 ## Available Application Commands: 
  
