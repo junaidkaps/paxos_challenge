@@ -1,7 +1,7 @@
 #Paxos Code Challenge for Junaid 
 This repository is a submission for the Paxos Code Challenge. Instructions and answers to the code challenge questions can be found below. 
 
-## To pull the docker image from Dockerhub and run:
+##Pull image from Dockerhub and Run:
 1. docker pull junaidkaps/paxoschallenge
 2. docker run -d -p 443:443 --name=paxosApp --restart=always --log-opt max-file=2 --log-opt max-size=1k junaidkaps/paxos_challenge
 
@@ -23,10 +23,14 @@ curl -i https://localhost/messages/iWillReturn404 -k
 This application was created using the Flask framework and is run using the stand-alone Tornado WSGI container. 
 
 ##Notes: 
-Deploy the application according to the following guidelines: 
-● The service should be restarted if it crashes -> This was acheived using docker's --restart=always flag as indicated in the command above. 
-● Capture the logs and have them rotate -> The docker container logs were captured in json format and rotated using the following constraints: --log-opt max-file=2 --log-opt max-size=1k. The rotation can be viewed under the /var/lib/docker/<containerID>/ 
-● Configure SSL for the service -> Configured. Please use -k option to avoid self-signed errors. 
+1. The service should be restarted if it crashes -> This was acheived using docker's ```--restart=always``` flag as indicated in the command above. 
+2. Capture the logs and have them rotate -> The docker container logs were captured in json format and rotated using the following constraints: 
+```
+--log-opt max-file=2 --log-opt max-size=1k.
+```
+The rotation can be viewed under the /var/lib/docker/<containerID>/ - The file will only rotate once it reaches a size of 1K. 
+
+3. Configure SSL for the service -> Configured. Please use -k option to avoid self-signed errors. 
 
 Note: While HTTPS is supported in this application the certificate and key provided as a sample is self-signed. As a result, curl will throw
 the following error: curl: (60) SSL certificate problem: self signed certificate. In order to avoid this when using self-signed certificates please use the -k
